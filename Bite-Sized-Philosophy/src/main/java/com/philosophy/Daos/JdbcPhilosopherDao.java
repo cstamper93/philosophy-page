@@ -43,7 +43,7 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
                 "VALUES (?, ?, ?, ?, ?) RETURNING id;";
         Integer newId = template.queryForObject(sql, Integer.class, philosopher.getPhilosopherId(),
                 philosopher.getName(), philosopher.getPhoto(), philosopher.getNationality(), philosopher.getEra());
-        return getPhilosopherById(newId);
+        return getPhilosopherById(newId); // verifies that the movie object was written to db
     }
 
     // Helper method
