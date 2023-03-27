@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController // keeps track of api endpoints
-@CrossOrigin
+@CrossOrigin // running backend on port 9000, frontend on 8080
 public class PhilosophyController {
 
     @Autowired // allows SpringBoot to inject the service
