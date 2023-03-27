@@ -1,14 +1,20 @@
 package com.philosophy.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Idea {
 
+    @JsonProperty("quote")
     private String quote;
-    private int philosopherId;
+    @JsonProperty("author")
+    private String philosopher;
 
-    public Idea(String quote, int philosopherId) {
+    public Idea(String quote, String philosopher) {
         this.quote = quote;
-        this.philosopherId = philosopherId;
+        this.philosopher = philosopher;
     }
+
+    public Idea(){}
 
     public String getQuote() {
         return quote;
@@ -18,15 +24,15 @@ public class Idea {
         this.quote = quote;
     }
 
-    public int getPhilosopherId() {
-        return philosopherId;
+    public String getPhilosopher() {
+        return philosopher;
     }
 
     @Override
     public String toString() {
         return "Idea{" +
                 "quote='" + quote + '\'' +
-                ", philosopherId=" + philosopherId +
+                ", philosopherId=" + philosopher +
                 '}';
     }
 

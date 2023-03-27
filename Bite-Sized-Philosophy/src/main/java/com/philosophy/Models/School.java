@@ -1,14 +1,20 @@
 package com.philosophy.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class School {
 
+    @JsonProperty("name")
     private String school;
-    private int philosopherId;
+    @JsonProperty("philosophers")
+    private String[] philosophers;
 
-    public School(String school, int philosopherId) {
+    public School(String school, String[] philosophers) {
         this.school = school;
-        this.philosopherId = philosopherId;
+        this.philosophers = philosophers;
     }
+
+    public School(){}
 
     public String getSchool() {
         return school;
@@ -18,15 +24,15 @@ public class School {
         this.school = school;
     }
 
-    public int getPhilosopherId() {
-        return philosopherId;
+    public String[] getPhilosophers() {
+        return philosophers;
     }
 
     @Override
     public String toString() {
         return "School{" +
                 "school='" + school + '\'' +
-                ", philosopherId=" + philosopherId +
+                ", philosopherIds=" + philosophers +
                 '}';
     }
 

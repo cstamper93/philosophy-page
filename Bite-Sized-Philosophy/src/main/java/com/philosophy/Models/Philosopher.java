@@ -1,8 +1,12 @@
 package com.philosophy.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Philosopher {
 
     //private int id;
+
+    @JsonProperty("id")
     private int philosopherId;
     private String name;
     private String photo;
