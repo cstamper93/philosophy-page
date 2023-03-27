@@ -28,6 +28,10 @@ public class Idea {
         return philosopher;
     }
 
+    public void setPhilosopher(String philosopher) {
+        this.philosopher = philosopher;
+    }
+
     @Override
     public String toString() {
         return "Idea{" +
