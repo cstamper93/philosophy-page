@@ -6,9 +6,9 @@ DROP TABLE IF EXISTS philosopher, school, ideas;
 
 CREATE TABLE philosopher(
     id SERIAL,
-    philosopher_id CHAR(10) UNIQUE,
+    philosopher_id VARCHAR(10) UNIQUE,
     philosopher_name VARCHAR(50),
-    photo VARCHAR(100),
+    photo VARCHAR(300),
     nationality VARCHAR(50),
     era VARCHAR(50),
     CONSTRAINT PK_philosopher PRIMARY KEY(id)

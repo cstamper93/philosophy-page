@@ -4,10 +4,12 @@
     <img class="philosopher-image" v-bind:src="philosopher.photo">
     <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
     <p v-if="hover">Era: {{ philosopher.era }}</p>
+    <button class="fav-btn" v-on:click.prevent="addToFavorites(philosopher)">Add to Favorites</button>
   </div>
 </template>
 
 <script>
+import BackendService from '@/services/BackendService';
 export default {
     name: "philosopher-content",
     data() {
@@ -17,6 +19,17 @@ export default {
     },
     props: {
         philosopher: Object
+    },
+    methods: {
+        addToFavorites(philosopher) {
+            if(confirm("Add philosopher to your favorites?")) {
+            BackendService.addPhilosopherToDatabase(philosopher).then((response) => {
+                if(response.status === 201) {
+                    alert("Philosopher added!");
+                }
+            });
+            }
+        }
     }
 }
 </script>
@@ -29,12 +42,15 @@ export default {
     border: 2px solid black;
     border-radius: 10px;
     width: 15em;
-    height: 22em;
+    height: 24em;
     margin: 1em;
     padding: 0.5em;
   }
   .card:hover {
     background-color: #eeeeee;
-    height: 27em;
+    height: 29em;
+  }
+  .fav-btn {
+    margin: 0.75em;
   }
 </style>

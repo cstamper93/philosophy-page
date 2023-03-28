@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Philosopher {
 
-    //private int id;
-
     @JsonProperty("id")
+    private int id;
     private int philosopherId;
     private String name;
     private String photo;
@@ -14,7 +13,7 @@ public class Philosopher {
     private String era;
 
     public Philosopher(int id, int philosopherId, String name, String photo, String nationality, String era) {
-        //this.id = id;
+        this.id = id;
         this.philosopherId = philosopherId;
         this.name = name;
         this.photo = photo;
@@ -24,13 +23,13 @@ public class Philosopher {
 
     public Philosopher() {}
 
-//    public int getId() {
-//        return id;
-//    }
+    public int getId() {
+        return id;
+    }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getPhilosopherId() {
         return philosopherId;
@@ -75,7 +74,7 @@ public class Philosopher {
     @Override
     public String toString() {
         return "Philosopher{" +
-                //"id=" + id +
+                "id=" + id +
                 ", philosopherId=" + philosopherId +
                 ", name='" + name + '\'' +
                 ", photo='" + photo + '\'' +

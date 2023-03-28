@@ -3,10 +3,12 @@ package com.philosophy.Daos;
 import com.philosophy.Models.Philosopher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcPhilosopherDao implements PhilosopherDao{
 
     // "Dependency Injection"
@@ -23,6 +25,7 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
         List<Philosopher> philosophers = new ArrayList<>();
         while(results.next()) {
             Philosopher philosopher = mapRowToPhilosopher(results);
+            philosophers.add(philosopher);
         }
         return philosophers;
     }
@@ -31,6 +34,8 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
     public Philosopher getPhilosopherById(int id) {
         String sql = "SELECT * FROM philosopher WHERE id = ?;";
         SqlRowSet results = template.queryForRowSet(sql, id);
+//        Philosopher philosopher = new Philosopher();
+//        philosopher.setId(id);
         if(results.next()) {
             return mapRowToPhilosopher(results);
         }
@@ -49,6 +54,7 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
     // Helper method
     private Philosopher mapRowToPhilosopher(SqlRowSet rs) {
         Philosopher philosopher = new Philosopher();
+        philosopher.setId(rs.getInt("id"));
         philosopher.setPhilosopherId(rs.getInt("philosopher_id"));
         philosopher.setName(rs.getString("philosopher_name"));
         philosopher.setPhoto(rs.getString("photo"));

@@ -7,5 +7,8 @@ const http = axios.create({
 export default {
     viewPhilosophersFromAPI() {
         return http.get("/philosophers");
+    },
+    addPhilosopherToDatabase(philosopher) {
+        return http.post("/add-philosopher", philosopher);
     }
 }
