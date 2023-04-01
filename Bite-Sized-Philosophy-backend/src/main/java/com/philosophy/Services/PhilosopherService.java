@@ -72,7 +72,7 @@ public class PhilosopherService {
     }
 
     // Pull in idea data
-    // Many pages of ideas, have to come up with creative way to iterate thru,
+    // Many pages of ideas, have to come up with creative way to iterate through,
     // then combine the arrays :)
     public List<Idea[]> loadAllIdeas() {
         ResponseEntity<IdeaResults> responseEntity =
@@ -130,8 +130,6 @@ public class PhilosopherService {
 
         return Arrays.asList(combinedSchools);
     }
-
-
 
     private HttpEntity<Void> makeEntity() {
         HttpHeaders headers = new HttpHeaders();
