@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Displaying Philosophers</h1>
+    <h1>Philosophers</h1>
     <div class="philosopher-container">
         <philosopher-content v-for="philosopher in listOfPhilosophers" v-bind:key="philosopher.philosopherId"
-        v-bind:philosopher= "philosopher" />
+        v-bind:philosopher = "philosopher" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     created() {
         BackendService.viewPhilosophersFromAPI().then((response) => {
             this.listOfPhilosophers = response.data;
-            console.log(response.data);
+            //console.log(response.data);
         })
     }
 };

@@ -8,7 +8,10 @@ export default {
     viewPhilosophersFromAPI() {
         return http.get("/philosophers");
     },
-    addPhilosopherToDatabase(philosopher) {
+    addPhilosopherToFavorites(philosopher) {
         return http.post("/add-philosopher", philosopher);
+    },
+    fetchFavorites() {
+        return http.get("/favorites");
     }
 }

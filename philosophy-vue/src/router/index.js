@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Philosophers from '../views/PhilosophersView.vue'
+import Favorites from '../views/FavoritesView.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/philosophers',
     name: 'Philosophers',
     component: Philosophers
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: Favorites
   }
 ]
 

@@ -54,7 +54,6 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
     private Philosopher mapRowToPhilosopher(SqlRowSet rs) {
         Philosopher philosopher = new Philosopher();
         philosopher.setId(rs.getInt("id"));
-        //philosopher.setPhilosopherId(rs.getInt("philosopher_id"));
         philosopher.setName(rs.getString("philosopher_name"));
         philosopher.setPhoto(rs.getString("photo"));
         philosopher.setNationality(rs.getString("nationality"));

@@ -2,9 +2,9 @@
   <div class="card" @mouseenter="hover=true" @mouseleave="hover=false">
     <h2 class="philosopher-name">{{ philosopher.name }}</h2>
     <img class="philosopher-image" v-bind:src="philosopher.photo">
+    <button class="fav-btn" v-on:click.prevent="addToFavorites(philosopher)">Add to Favorites</button>
     <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
     <p v-if="hover">Era: {{ philosopher.era }}</p>
-    <button class="fav-btn" v-on:click.prevent="addToFavorites(philosopher)">Add to Favorites</button>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     methods: {
         addToFavorites(philosopher) {
             if(confirm("Add philosopher to your favorites?")) {
-            BackendService.addPhilosopherToDatabase(philosopher).then((response) => {
+            BackendService.addPhilosopherToFavorites(philosopher).then((response) => {
                 if(response.status === 201) {
                     alert("Philosopher added!");
                 }
