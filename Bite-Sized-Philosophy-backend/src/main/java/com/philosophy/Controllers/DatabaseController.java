@@ -25,4 +25,9 @@ public class DatabaseController {
     public List<Philosopher> fetchFavorites() {
         return dao.getAllPhilosophers();
     }
+
+    @DeleteMapping("/favorites/{id}")
+    public boolean deletePhilosopher(@PathVariable int id) {
+        return dao.removePhilosopher(id);
+    }
 }

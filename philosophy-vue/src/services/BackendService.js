@@ -13,5 +13,8 @@ export default {
     },
     fetchFavorites() {
         return http.get("/favorites");
+    },
+    removeFromFavs(id) {
+        return http.delete(`/favorites/${id}`);
     }
 }

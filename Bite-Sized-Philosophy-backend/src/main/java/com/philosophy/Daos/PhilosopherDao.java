@@ -15,5 +15,7 @@ public interface PhilosopherDao {
 
     Philosopher addNewPhilosopher(Philosopher philosopher); // CREATE
 
+    boolean removePhilosopher(int id); // DELETE
+
 
 }

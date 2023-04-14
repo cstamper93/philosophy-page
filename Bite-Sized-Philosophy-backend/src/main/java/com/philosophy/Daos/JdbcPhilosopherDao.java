@@ -51,6 +51,17 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
         return getPhilosopherById(newId); // verifies that the movie object was written to db
     }
 
+    @Override
+    public boolean removePhilosopher(int id) {
+        boolean success = false;
+        String sql = "DELETE FROM philosopher WHERE id = ?;";
+        int linesUpdated = template.update(sql, id);
+        if(linesUpdated == 1) {
+            success = true;
+        }
+        return success;
+    }
+
     private Philosopher mapRowToPhilosopher(SqlRowSet rs) {
         Philosopher philosopher = new Philosopher();
         philosopher.setId(rs.getInt("id"));
