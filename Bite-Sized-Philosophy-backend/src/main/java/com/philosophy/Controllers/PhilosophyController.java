@@ -1,5 +1,6 @@
 package com.philosophy.Controllers;
 
+import com.philosophy.Daos.PhilosopherDao;
 import com.philosophy.Models.Idea;
 import com.philosophy.Models.Philosopher;
 import com.philosophy.Models.School;
@@ -20,9 +21,13 @@ public class PhilosophyController {
     @Autowired // allows SpringBoot to inject the service
     PhilosopherService service;
 
+    @Autowired
+    PhilosopherDao philosopherDao;
+
     @GetMapping(path="/philosophers") // sidesteps the extra stuff when using @RequestMapping
-    public List<Philosopher> getAllPhilosophersFromApi() {
-        return service.loadAllPhilosophers();
+    public List<Philosopher> getAllPhilosophersFromDb() {
+        service.loadAllPhilosophers();
+        return philosopherDao.getAllPhilosophersFromDb();
     }
 
     @GetMapping("/ideas")

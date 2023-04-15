@@ -11,7 +11,9 @@ public interface PhilosopherDao {
 
     void insertPhilosophersFromApi(List<Philosopher> philosophers);
 
-    List<Philosopher> getAllPhilosophers(); // READ (GET)
+    List<Philosopher> getAllPhilosophersFromDb();
+
+    List<Philosopher> getFavoritedPhilosophers(); // READ (GET)
 
     Philosopher getPhilosopherById(int id); // READ (GET)
 
@@ -19,5 +21,8 @@ public interface PhilosopherDao {
 
     boolean removePhilosopher(int id); // DELETE
 
+    boolean favorite(int id);
+
+    boolean unfavorite(int id);
 
 }

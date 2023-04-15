@@ -5,16 +5,23 @@ const http = axios.create({
 });
 
 export default {
-    viewPhilosophersFromAPI() {
+    viewPhilosophersFromDb() {
         return http.get("/philosophers");
     },
-    addPhilosopherToFavorites(philosopher) {
-        return http.post("/add-philosopher", philosopher);
-    },
+    // addPhilosopherToFavorites(philosopher) {
+    //     return http.post("/add-philosopher", philosopher);
+    // },
     fetchFavorites() {
         return http.get("/favorites");
     },
-    removeFromFavs(id) {
+    // Unneeded?
+    removePhilosopher(id) {
         return http.delete(`/favorites/${id}`);
-    }
+    },
+    addToFavs(philosopher) {
+        return http.put("/add-favorites", philosopher);
+    },
+    removeFromFavs(philosopher) {
+        return http.put("/remove-favorites", philosopher);
+    },
 }

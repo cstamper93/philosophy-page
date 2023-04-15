@@ -2,7 +2,7 @@
   <div class="card" @mouseenter="hover=true" @mouseleave="hover=false">
     <h2 class="philosopher-name">{{ philosopher.name }}</h2>
     <img class="philosopher-image" v-bind:src="philosopher.photo">
-    <button v-if="!addedToFavs" v-on:click="addedToFavs=true" class="fav-btn" 
+    <button v-if="philosopher.favorited == false" class="fav-btn" 
     v-on:click.prevent="addToFavorites(philosopher)">Add to Favorites
     </button>
     <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
@@ -17,7 +17,6 @@ export default {
     data() {
         return {
             hover: false,
-            addedToFavs: false,
         };
     },
     props: {
@@ -26,9 +25,10 @@ export default {
     methods: {
         addToFavorites(philosopher) {
             if(confirm("Add philosopher to your favorites?")) {
-            BackendService.addPhilosopherToFavorites(philosopher).then((response) => {
-                if(response.status === 201) {
+            BackendService.addToFavs(philosopher).then((response) => {
+                if(response.status === 200) {
                     alert("Philosopher added!");
+                    location.reload;
                 }
             });
             }

@@ -21,9 +21,8 @@ export default {
         }
     },
     created() {
-        BackendService.viewPhilosophersFromAPI().then((response) => {
+        BackendService.viewPhilosophersFromDb().then((response) => {
             this.listOfPhilosophers = response.data;
-            //console.log(response.data);
         })
     }
 };

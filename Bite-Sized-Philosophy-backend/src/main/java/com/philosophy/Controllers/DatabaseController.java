@@ -28,12 +28,23 @@ public class DatabaseController {
 
     @GetMapping("/favorites")
     public List<Philosopher> fetchFavorites() {
-        return philosopherDao.getAllPhilosophers();
+        return philosopherDao.getFavoritedPhilosophers();
     }
 
+    // Unneeded?
     @DeleteMapping("/favorites/{id}")
     public boolean deletePhilosopher(@PathVariable int id) {
         return philosopherDao.removePhilosopher(id);
+    }
+
+    @PutMapping("/add-favorites")
+    public boolean addToFavs(@RequestBody Philosopher philosopher) {
+        return philosopherDao.favorite(philosopher.getId());
+    }
+
+    @PutMapping("/remove-favorites")
+    public boolean removeFromFavs(@RequestBody Philosopher philosopher) {
+        return philosopherDao.unfavorite(philosopher.getId());
     }
 
 //    @GetMapping("/ideas")

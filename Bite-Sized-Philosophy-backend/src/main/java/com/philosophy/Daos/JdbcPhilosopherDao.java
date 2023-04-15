@@ -19,18 +19,49 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
     }
 
     @Override
-    public void insertPhilosophersFromApi(List<Philosopher> philosophers) {
-        String sql = "INSERT INTO philosopher (philosopher_name, photo, nationality, era, favorited) " +
+    public void insertPhilosophersFromApi(List<Philosopher> incomingPhilosophers) {
+        String insertSql = "INSERT INTO philosopher (philosopher_name, photo, nationality, era, favorited) " +
                 "VALUES(?, ?, ?, ?, ?);";
-        for(Philosopher item : philosophers) {
-            template.update(sql, item.getName(),item.getPhoto(), item.getNationality(),
-                    item.getEra(), item.getFavorited());
+        String getCurrentSql = "SELECT * FROM philosopher;";
+
+        // Load current db entries into list to compare w/list from api
+        // If incoming philosopher not found, add to db...
+        List<Philosopher> currentPhilosophers = new ArrayList<>();
+        SqlRowSet results = template.queryForRowSet(getCurrentSql);
+        while(results.next()) {
+            Philosopher philosopher = mapRowToPhilosopher(results);
+            currentPhilosophers.add(philosopher);
+        }
+
+        for(Philosopher incoming : incomingPhilosophers) {
+            int counter = 0;
+            for(Philosopher current : currentPhilosophers) {
+                if(incoming.getName().equals(current.getName())) {
+                    counter ++;
+                }
+            }
+            if(counter == 0) {
+                template.update(insertSql, incoming.getName(), incoming.getPhoto(), incoming.getNationality(),
+                        incoming.getEra(), incoming.getFavorited());
+            }
         }
     }
 
     @Override
-    public List<Philosopher> getAllPhilosophers() {
+    public List<Philosopher> getAllPhilosophersFromDb() {
+        List<Philosopher> philosophers = new ArrayList<>();
         String sql = "SELECT * FROM philosopher;";
+        SqlRowSet results = template.queryForRowSet(sql);
+        while(results.next()) {
+            Philosopher philosopher = mapRowToPhilosopher(results);
+            philosophers.add(philosopher);
+        }
+        return philosophers;
+    }
+
+    @Override
+    public List<Philosopher> getFavoritedPhilosophers() {
+        String sql = "SELECT * FROM philosopher WHERE favorited = true;";
         SqlRowSet results = template.queryForRowSet(sql);
         List<Philosopher> philosophers = new ArrayList<>();
         while(results.next()) {
@@ -65,6 +96,30 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
     public boolean removePhilosopher(int id) {
         boolean success = false;
         String sql = "DELETE FROM philosopher WHERE id = ?;";
+        int linesUpdated = template.update(sql, id);
+        if(linesUpdated == 1) {
+            success = true;
+        }
+        return success;
+    }
+
+    @Override
+    public boolean favorite(int id) {
+        boolean success = false;
+        String sql = "UPDATE philosopher SET favorited = true " +
+                "WHERE id = ?;";
+        int linesUpdated = template.update(sql, id);
+        if(linesUpdated == 1) {
+            success = true;
+        }
+        return success;
+    }
+
+    @Override
+    public boolean unfavorite(int id) {
+        boolean success = false;
+        String sql = "UPDATE philosopher SET favorited = false " +
+                "WHERE id = ?;";
         int linesUpdated = template.update(sql, id);
         if(linesUpdated == 1) {
             success = true;

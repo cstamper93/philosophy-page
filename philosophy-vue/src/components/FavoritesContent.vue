@@ -23,7 +23,7 @@ export default {
     methods: {
         removeFav(favorite) {
             if(confirm("Are you sure you want to remove this philosopher from your favorites?")) {
-                BackendService.removeFromFavs(favorite.id).then((response) => {
+                BackendService.removeFromFavs(favorite).then((response) => {
                     if(response.status === 200) {
                         alert("Successfully removed philosopher.");
                         location.reload();
