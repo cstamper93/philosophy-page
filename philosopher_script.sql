@@ -9,6 +9,7 @@ CREATE TABLE philosopher(
     photo VARCHAR(300),
     nationality VARCHAR(50),
     era VARCHAR(50),
+    favorited BOOLEAN,
     CONSTRAINT PK_philosopher PRIMARY KEY(id)
 );
 

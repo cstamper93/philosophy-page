@@ -19,6 +19,16 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
     }
 
     @Override
+    public void insertPhilosophersFromApi(List<Philosopher> philosophers) {
+        String sql = "INSERT INTO philosopher (philosopher_name, photo, nationality, era, favorited) " +
+                "VALUES(?, ?, ?, ?, ?);";
+        for(Philosopher item : philosophers) {
+            template.update(sql, item.getName(),item.getPhoto(), item.getNationality(),
+                    item.getEra(), item.getFavorited());
+        }
+    }
+
+    @Override
     public List<Philosopher> getAllPhilosophers() {
         String sql = "SELECT * FROM philosopher;";
         SqlRowSet results = template.queryForRowSet(sql);
@@ -69,6 +79,7 @@ public class JdbcPhilosopherDao implements PhilosopherDao{
         philosopher.setPhoto(rs.getString("photo"));
         philosopher.setNationality(rs.getString("nationality"));
         philosopher.setEra(rs.getString("era"));
+        philosopher.setFavorited(rs.getBoolean("favorited"));
         return philosopher;
     }
 

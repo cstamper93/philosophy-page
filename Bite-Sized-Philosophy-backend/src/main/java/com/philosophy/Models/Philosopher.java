@@ -11,6 +11,7 @@ public class Philosopher {
     private String photo;
     private String nationality;
     private String era;
+    private boolean favorited;
 
     public Philosopher(int id, int philosopherId, String name, String photo, String nationality, String era) {
         this.id = id;
@@ -19,6 +20,7 @@ public class Philosopher {
         this.photo = photo;
         this.nationality = nationality;
         this.era = era;
+        this.favorited = false;
     }
 
     public Philosopher() {}
@@ -69,6 +71,14 @@ public class Philosopher {
 
     public void setEra(String era) {
         this.era = era;
+    }
+
+    public boolean getFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
     }
 
     @Override

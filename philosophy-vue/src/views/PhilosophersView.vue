@@ -2,7 +2,8 @@
   <div>
     <h1>Philosophers</h1>
     <div class="philosopher-container">
-        <philosopher-content v-for="philosopher in listOfPhilosophers" v-bind:key="philosopher.philosopherId"
+        <philosopher-content v-for="philosopher in listOfPhilosophers" 
+        v-bind:key="philosopher.id"
         v-bind:philosopher = "philosopher" />
     </div>
   </div>

@@ -3,7 +3,10 @@ package com.philosophy.Services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.philosophy.Daos.IdeaDao;
+import com.philosophy.Daos.PhilosopherDao;
 import com.philosophy.Models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +25,12 @@ public class PhilosopherService {
     @Value("${PHILOSOPHER_API}") // spring annotation that pulls from application.properties
     private String PHILOSOPHER_API; // CAPS FOR CONST
     RestTemplate template = new RestTemplate();
+
+    @Autowired
+    PhilosopherDao philosopherDao;
+
+    @Autowired
+    IdeaDao ideaDao;
 
     public List<Philosopher> getAllPhilosophers() {
         HttpHeaders headers = new HttpHeaders();
@@ -68,6 +77,10 @@ public class PhilosopherService {
 
         PhilosopherResults philosopherResults = responseEntity.getBody();
         Philosopher[] philosophers = philosopherResults.getPhilosophers();
+
+        // insert philosophers into db
+        philosopherDao.insertPhilosophersFromApi(Arrays.asList(philosophers));
+
         return Arrays.asList(philosophers);
     }
 
@@ -97,6 +110,8 @@ public class PhilosopherService {
             Idea[] ideas = responseEntity2.getBody().getIdeas();
             ideaResultsPageList.add(ideas);
         }
+
+        ideaDao.insertIdeasFromApiToDb(ideaResultsPageList);
 
         // Idea[] ideas = responseEntity.getBody().getIdeas();
         return ideaResultsPageList;
