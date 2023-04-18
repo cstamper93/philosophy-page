@@ -24,6 +24,7 @@ export default {
         BackendService.viewPhilosophersFromDb().then((response) => {
             this.listOfPhilosophers = response.data;
         })
+        BackendService.loadIdeas();
     }
 };
 </script>

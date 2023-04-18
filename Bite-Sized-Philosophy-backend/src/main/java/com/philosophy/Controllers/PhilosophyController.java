@@ -1,5 +1,6 @@
 package com.philosophy.Controllers;
 
+import com.philosophy.Daos.IdeaDao;
 import com.philosophy.Daos.PhilosopherDao;
 import com.philosophy.Models.Idea;
 import com.philosophy.Models.Philosopher;
@@ -24,20 +25,23 @@ public class PhilosophyController {
     @Autowired
     PhilosopherDao philosopherDao;
 
+    @Autowired
+    IdeaDao ideaDao;
+
     @GetMapping(path="/philosophers") // sidesteps the extra stuff when using @RequestMapping
     public List<Philosopher> getAllPhilosophersFromDb() {
         service.loadAllPhilosophers();
         return philosopherDao.getAllPhilosophersFromDb();
     }
 
-    @GetMapping("/ideas")
-    public List<Idea[]> getAllIdeasFromApi() {
-        return service.loadAllIdeas();
+    @PostMapping("/add-ideas")
+    public void insertIdeasFromApiIntoDb() {
+        service.loadAllIdeas();
     }
 
-    @GetMapping("/schools")
-    public List<School> getAllSchoolsFromApi() {
-        return service.loadAllSchools();
-    }
+//    @GetMapping("/schools")
+//    public List<School> getAllSchoolsFromApi() {
+//        return service.loadAllSchools();
+//    }
 
 }

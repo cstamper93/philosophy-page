@@ -1,5 +1,7 @@
 <template>
-  <div class="card" @mouseenter="hover=true" @mouseleave="hover=false">
+  <router-link v-bind:to="{name: 'Philosopher-Details'}">
+  <div class="card" @mouseenter="hover=true" 
+  @mouseleave="hover=false">
     <h2 class="philosopher-name">{{ philosopher.name }}</h2>
     <img class="philosopher-image" v-bind:src="philosopher.photo">
     <button v-if="philosopher.favorited == false" class="fav-btn" 
@@ -8,6 +10,7 @@
     <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
     <p v-if="hover">Era: {{ philosopher.era }}</p>
   </div>
+</router-link>
 </template>
 
 <script>

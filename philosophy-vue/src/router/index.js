@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Philosophers from '../views/PhilosophersView.vue'
 import Favorites from '../views/FavoritesView.vue'
+import PhilosopherDetails from '../components/PhilosopherDetails.vue';
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/favorites',
     name: 'Favorites',
     component: Favorites
+  },
+  {
+    path: 'philosopher-details',
+    name: 'Philosopher-Details',
+    component: PhilosopherDetails
   }
 ]
 

@@ -24,4 +24,10 @@ export default {
     removeFromFavs(philosopher) {
         return http.put("/remove-favorites", philosopher);
     },
+    loadIdeas() {
+        return http.post("/add-ideas");
+    },
+    fetchIdeasWithId(id) {
+        return http.get("/ideas", id);
+    }
 }

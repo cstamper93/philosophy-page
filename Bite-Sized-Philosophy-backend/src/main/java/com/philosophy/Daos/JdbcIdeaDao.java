@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +21,43 @@ public class JdbcIdeaDao implements IdeaDao{
     }
 
     @Override
-    public void insertIdeasFromApiToDb(List<Idea[]> allIdeas) {
-        String sql = "INSERT INTO idea (quote, philosopher_id) " +
+    public void insertIdeasFromApiToDb(List<Idea[]> allIdeasFromApi) {
+        String insertSql = "INSERT INTO idea (quote, philosopher_id) " +
                 "VALUES (?, ?);";
-//        List<Idea[]> allIdeas = new ArrayList<>();
-//        allIdeas = service.loadAllIdeas();
-        // iterate through each array, then through each idea, and map that to db
-        for(int i=0; i<allIdeas.size(); i++) {
-            for(int j=0; j<allIdeas.get(i).length; j++) {
-                template.update(sql, allIdeas.get(i)[j].getQuote(),
-                        getIdByPhilosopherName(allIdeas.get(i)[j].getPhilosopher()));
+        String selectSql = "SELECT quote, philosopher_name FROM idea " +
+                "JOIN philosopher ON idea.philosopher_id = philosopher.id;";
+
+        List<Idea> currentIdeasInDb = new ArrayList<>();
+        SqlRowSet results = template.queryForRowSet(selectSql);
+        while(results.next()) {
+            Idea incomingIdea = mapRowToIdea(results);
+            currentIdeasInDb.add(incomingIdea);
+        }
+
+        // 1) Create List<Idea> objects from the List<Idea[]> that is input from argument
+        // 2) Filter out duplicates
+        // 3) Convert philosopher name to id and insert into db
+
+        List<Idea> incomingIdeasFromApi = new ArrayList<>();
+        for(int i=0; i<allIdeasFromApi.size(); i++) {
+            for(int j=0; j<allIdeasFromApi.get(i).length; j++) {
+                incomingIdeasFromApi.add(allIdeasFromApi.get(i)[j]);
+            }
+        }
+
+        // Compare incoming Ideas to ideas currently in db.
+        // if already present in db, don't insert; else, insert
+
+        for(int i=0; i<incomingIdeasFromApi.size(); i++) {
+            int counter = 0;
+            for(int j=0; j<currentIdeasInDb.size(); j++) {
+                if(incomingIdeasFromApi.get(i).getQuote().equals(currentIdeasInDb.get(j).getQuote())) {
+                    counter++;
+                }
+            }
+            if(counter == 0) {
+                template.update(insertSql, incomingIdeasFromApi.get(i).getQuote(),
+                        getIdByPhilosopherName(incomingIdeasFromApi.get(i).getPhilosopher()));
             }
         }
     }
@@ -71,8 +99,7 @@ public class JdbcIdeaDao implements IdeaDao{
     private Idea mapRowToIdea(SqlRowSet rowSet) {
         Idea idea = new Idea();
         idea.setQuote(rowSet.getString("quote"));
-        //idea.setPhilosopher(rowSet.getString())
-
+        idea.setPhilosopher(rowSet.getString("philosopher_name"));
         return idea;
     }
 }

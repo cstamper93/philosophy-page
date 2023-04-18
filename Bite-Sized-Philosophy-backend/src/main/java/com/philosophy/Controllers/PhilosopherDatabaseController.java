@@ -2,7 +2,6 @@ package com.philosophy.Controllers;
 
 import com.philosophy.Daos.IdeaDao;
 import com.philosophy.Daos.PhilosopherDao;
-import com.philosophy.Models.Idea;
 import com.philosophy.Models.Philosopher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,13 +11,10 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class DatabaseController {
+public class PhilosopherDatabaseController {
 
     @Autowired
     PhilosopherDao philosopherDao;
-
-    @Autowired
-    IdeaDao ideaDao;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add-philosopher")
@@ -47,8 +43,4 @@ public class DatabaseController {
         return philosopherDao.unfavorite(philosopher.getId());
     }
 
-//    @GetMapping("/ideas")
-//    public List<String> fetchIdeasByPhilosopherId(@RequestParam int id) {
-//        return ideaDao.getIdeasByPhilosopherId(id);
-//    }
 }

@@ -21,7 +21,7 @@ CREATE TABLE school(
 );
 
 CREATE TABLE idea(
-    quote VARCHAR(500),
+    quote VARCHAR(2000),
     philosopher_id INTEGER,
     CONSTRAINT PK_idea PRIMARY KEY(quote, philosopher_id),
     CONSTRAINT FK_idea_philosopher FOREIGN KEY (philosopher_id) REFERENCES philosopher(id)
