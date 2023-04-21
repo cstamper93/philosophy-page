@@ -43,4 +43,14 @@ public class PhilosopherDatabaseController {
         return philosopherDao.unfavorite(philosopher.getId());
     }
 
+    @GetMapping("/philosopher-details/{id}")
+    public Philosopher getPhilosopherById(@PathVariable int id) {
+        if(philosopherDao.getPhilosopherById(id) != null) {
+            return philosopherDao.getPhilosopherById(id);
+        } else {
+            System.out.println("Error while fetching philosopher details...");
+            return null;
+        }
+    }
+
 }

@@ -18,8 +18,8 @@ public class IdeaDatabaseController {
     @Autowired
     IdeaDao ideaDao;
 
-    @GetMapping("/ideas")
-    public List<String> getAllIdeasByIdFromDb(@RequestParam int id) {
+    @GetMapping("/ideas/{id}")
+    public List<String> getAllIdeasByIdFromDb(@PathVariable int id) {
         return ideaDao.getIdeasByPhilosopherId(id);
     }
 

@@ -1,16 +1,17 @@
 <template>
-  <router-link v-bind:to="{name: 'Philosopher-Details'}">
+  <router-link v-bind:to="{name: 'Philosopher-Details-View'}">
   <div class="card" @mouseenter="hover=true" 
-  @mouseleave="hover=false">
+  @mouseleave="hover=false"
+  v-on:click="saveUserChoice(philosopher.id)">
     <h2 class="philosopher-name">{{ philosopher.name }}</h2>
     <img class="philosopher-image" v-bind:src="philosopher.photo">
     <button v-if="philosopher.favorited == false" class="fav-btn" 
     v-on:click.prevent="addToFavorites(philosopher)">Add to Favorites
     </button>
-    <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
-    <p v-if="hover">Era: {{ philosopher.era }}</p>
+    <!-- <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
+    <p v-if="hover">Era: {{ philosopher.era }}</p> -->
   </div>
-</router-link>
+  </router-link>
 </template>
 
 <script>
@@ -36,6 +37,14 @@ export default {
             });
             }
         },
+        saveUserChoice(id) {
+          try {
+            localStorage.setItem('userChoice', id);
+            console.log('User choice saved to local storage');
+          } catch (error) {
+            console.error('Error saving user choice to local storage: ', error);
+          }
+        }
     }
 }
 </script>
@@ -45,6 +54,10 @@ export default {
     width: 10em; 
   }
   .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border: 2px solid black;
     border-radius: 10px;
     width: 15em;
@@ -54,7 +67,6 @@ export default {
   }
   .card:hover {
     background-color: #eeeeee;
-    height: 29em;
   }
   .fav-btn {
     margin: 0.75em;

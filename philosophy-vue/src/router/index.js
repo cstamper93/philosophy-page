@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+//import HomeView from '../views/HomeView.vue'
 import Philosophers from '../views/PhilosophersView.vue'
 import Favorites from '../views/FavoritesView.vue'
-import PhilosopherDetails from '../components/PhilosopherDetails.vue';
+import PhilosopherDetailsView from '../views/PhilosopherDetailsView.vue';
 
 Vue.use(VueRouter)
 
@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Philosophers
   },
   {
     path: '/about',
@@ -31,10 +31,15 @@ const routes = [
     name: 'Favorites',
     component: Favorites
   },
+  // {
+  //   path: '/philosopher-details',
+  //   name: 'Philosopher-Details',
+  //   component: PhilosopherDetails
+  // },
   {
-    path: 'philosopher-details',
-    name: 'Philosopher-Details',
-    component: PhilosopherDetails
+    path: '/philosopher-details-view',
+    name: 'Philosopher-Details-View',
+    component: PhilosopherDetailsView
   }
 ]
 

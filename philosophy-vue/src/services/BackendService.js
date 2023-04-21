@@ -28,6 +28,9 @@ export default {
         return http.post("/add-ideas");
     },
     fetchIdeasWithId(id) {
-        return http.get("/ideas", id);
+        return http.get(`/ideas/${id}`);
+    },
+    fetchPhilosopherDeets(id) {
+        return http.get(`/philosopher-details/${id}`);
     }
 }
