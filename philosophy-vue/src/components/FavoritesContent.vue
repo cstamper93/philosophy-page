@@ -3,8 +3,8 @@
     <h2 class="name">{{ favorite.name }}</h2>
     <img class="image" v-bind:src="favorite.photo">
     <button @click="removeFav(favorite)" class="remove-btn">Remove from Favorites</button>
-    <p v-if="hover">Nationality: {{ favorite.nationality }}</p>
-    <p v-if="hover">Era: {{ favorite.era }}</p>
+    <!-- <p v-if="hover">Nationality: {{ favorite.nationality }}</p>
+    <p v-if="hover">Era: {{ favorite.era }}</p> -->
   </div>
 </template>
 
@@ -49,7 +49,6 @@ export default {
   }
   .fav-card:hover {
     background-color: #eeeeee;
-    height: 29em;
   }
   .remove-btn {
     margin: 0.75em;

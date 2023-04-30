@@ -28,6 +28,10 @@ public class School {
         return philosophers;
     }
 
+    public void setPhilosophers(String[] philosophers) {
+        this.philosophers = philosophers;
+    }
+
     @Override
     public String toString() {
         return "School{" +

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.philosophy.Daos.IdeaDao;
 import com.philosophy.Daos.PhilosopherDao;
+import com.philosophy.Daos.SchoolDao;
 import com.philosophy.Models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,12 +26,12 @@ public class PhilosopherService {
     @Value("${PHILOSOPHER_API}") // spring annotation that pulls from application.properties
     private String PHILOSOPHER_API; // CAPS FOR CONST
     RestTemplate template = new RestTemplate();
-
     @Autowired
     PhilosopherDao philosopherDao;
-
     @Autowired
     IdeaDao ideaDao;
+    @Autowired
+    SchoolDao schoolDao;
 
     public List<Philosopher> getAllPhilosophers() {
         HttpHeaders headers = new HttpHeaders();
@@ -130,20 +131,18 @@ public class PhilosopherService {
         School[] schoolsPg1 = responseEntityPg1.getBody().getSchools();
         School[] schoolsPg2 = responseEntityPg2.getBody().getSchools();
 
-        int length1 = schoolsPg1.length;
-        int length2 = schoolsPg2.length;
-        int totalLength = length1 + length2;
-        School[] combinedSchools = new School[totalLength];
+        List<School> combinedSchools = new ArrayList<>();
 
-        for(int i=0; i<totalLength; i++) {
-            if(i<length1) {
-                combinedSchools[i] = schoolsPg1[i];
-            } else {
-                combinedSchools[i] = schoolsPg2[i - length1];
-            }
+        for(School obj : schoolsPg1) {
+            combinedSchools.add(obj);
+        }
+        for(School obj : schoolsPg2) {
+            combinedSchools.add(obj);
         }
 
-        return Arrays.asList(combinedSchools);
+        schoolDao.insertSchoolsFromApi(combinedSchools);
+
+        return combinedSchools;
     }
 
     private HttpEntity<Void> makeEntity() {

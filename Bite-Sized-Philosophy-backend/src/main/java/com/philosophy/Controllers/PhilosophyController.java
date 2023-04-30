@@ -39,6 +39,11 @@ public class PhilosophyController {
         service.loadAllIdeas();
     }
 
+    @PostMapping("/add-schools")
+    public void insertSchoolsFromApiIntoDb() {
+        service.loadAllSchools();
+    }
+
 //    @GetMapping("/schools")
 //    public List<School> getAllSchoolsFromApi() {
 //        return service.loadAllSchools();
