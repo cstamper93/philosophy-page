@@ -11,6 +11,6 @@ public interface SchoolDao {
     Integer getIdFromPhilosopherName(String name);
     void insertSchoolsFromApi(List<School> incomingSchools);
     List<School> getCurrentSchoolsFromDb();
-    List<School> getSchoolsFromDbWithPhilosopherId(int id);
+    List<String> getSchoolsFromDbWithPhilosopherId(int id);
 
 }

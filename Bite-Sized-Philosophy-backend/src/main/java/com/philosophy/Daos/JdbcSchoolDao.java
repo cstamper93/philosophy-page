@@ -112,8 +112,14 @@ public class JdbcSchoolDao implements SchoolDao{
     }
 
     @Override
-    public List<School> getSchoolsFromDbWithPhilosopherId(int id) {
-        return null;
+    public List<String> getSchoolsFromDbWithPhilosopherId(int id) {
+        List<String> schoolsList = new ArrayList<>();
+        String sql = "SELECT school_name FROM school WHERE philosopher_id = ?;";
+        SqlRowSet results = template.queryForRowSet(sql, id);
+        while(results.next()) {
+            schoolsList.add(results.getString("school_name"));
+        }
+        return schoolsList;
     }
 
     private SchoolDatabase mapRowToSchoolDatabaseObj(SqlRowSet rowSet) {

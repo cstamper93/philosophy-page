@@ -25,6 +25,7 @@ export default {
             this.listOfPhilosophers = response.data;
         });
         BackendService.loadIdeas();
+        BackendService.loadSchools();
     }
 };
 </script>

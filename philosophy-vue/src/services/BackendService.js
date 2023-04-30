@@ -27,10 +27,16 @@ export default {
     loadIdeas() {
         return http.post("/add-ideas");
     },
+    loadSchools() {
+        return http.post("/add-schools");
+    },
     fetchIdeasWithId(id) {
         return http.get(`/ideas/${id}`);
     },
     fetchPhilosopherDeets(id) {
         return http.get(`/philosopher-details/${id}`);
-    }
+    },
+    // fetchSchoolsWithId(id) {
+
+    // }
 }
