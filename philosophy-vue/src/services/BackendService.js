@@ -36,7 +36,7 @@ export default {
     fetchPhilosopherDeets(id) {
         return http.get(`/philosopher-details/${id}`);
     },
-    // fetchSchoolsWithId(id) {
-
-    // }
+    fetchSchoolsWithId(id) {
+        return http.get(`/schools/${id}`);
+    }
 }

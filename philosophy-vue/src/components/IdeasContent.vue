@@ -8,9 +8,7 @@
 import BackendService from '@/services/BackendService';
 export default {
     name: "ideas-content",
-    props: {
-        idea: String
-    },
+    props: { idea: String },
     data() {
         return {
             ideasList: []

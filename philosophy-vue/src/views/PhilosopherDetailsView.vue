@@ -5,6 +5,10 @@
     <ideas-content v-for="idea in ideasList"
     v-bind:key="idea"
     v-bind:idea="idea" />
+    <h1>Schools</h1>
+    <schools-content v-for="school in schoolsList" 
+    :key="school"
+    :school="school"/>
   </div>
 </template>
 
@@ -12,21 +16,29 @@
 import BackendService from '@/services/BackendService';
 import PhilosopherDetails from '../components/PhilosopherDetails.vue';
 import IdeasContent from '../components/IdeasContent.vue';
+import SchoolsContent from '../components/SchoolsContent.vue';
 export default {
     components: { 
         PhilosopherDetails,
-        IdeasContent
+        IdeasContent,
+        SchoolsContent
     },
     name: 'philosopher-details-view',
     data() {
         return {
-            ideasList: []
+            ideasList: [],
+            schoolsList: []
         }
     },
     created() {
         BackendService.fetchIdeasWithId(this.userChoice).then((response) => {
             if(response.status === 200) {
                 this.ideasList = response.data;
+            }
+        });
+        BackendService.fetchSchoolsWithId(this.userChoice).then((response) => {
+            if(response.status === 200) {
+                this.schoolsList = response.data;
             }
         });
     },
