@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <p>{{ school }}</p>
-  </div>
+  <ul class="schools-list">
+    <li>{{ school }}</li>
+  </ul>
 </template>
 
 <script>
@@ -18,5 +18,9 @@ export default {
 </script>
 
 <style>
-
+  .schools-list {
+    display: flex;
+    flex-direction: column;
+    list-style-position: inside;
+  }
 </style>

@@ -1,9 +1,15 @@
 <template>
-  <div>
-    <h1>{{ philosopher.name }}</h1>
-    <img class="philosopher-image" v-bind:src="philosopher.photo">
-    <h2>Nationality: {{ philosopher.nationality }}</h2>
-    <h2>Era: {{ philosopher.era }}</h2>
+  <div class="details-box">
+    <div class="img">
+      <img class="philosopher-image" v-bind:src="philosopher.photo">
+    </div>
+    <div class="name-nat-era">
+      <h1>{{ philosopher.name }}</h1>
+      <h2>Nationality:</h2>
+      <p>{{ philosopher.nationality }}</p>
+      <h2>Era:</h2>
+      <p>{{ philosopher.era }}</p>
+    </div>
   </div>
 </template>
 
@@ -38,5 +44,16 @@ export default {
 </script>
 
 <style>
-
+  .details-box {
+    display: flex;
+  }
+  .img {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+  .name-nat-era {
+    margin-left: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 </style>

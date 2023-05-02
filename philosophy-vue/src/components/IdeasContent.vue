@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>{{ idea }}</p>
+  <div class="ideas-box">
+    <p>"{{ idea }}"</p>
   </div>
 </template>
 
@@ -26,5 +26,8 @@ export default {
 </script>
 
 <style>
-
+  .ideas-box {
+    margin-left: 7em;
+    margin-right: 7em;
+  }
 </style>

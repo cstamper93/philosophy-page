@@ -54,11 +54,13 @@ export default {
     width: 10em; 
   }
   .card {
+    background-color: #eae7dc;
+    color: #2c3e50;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
+    border: 0.2em solid #d2691e;
     border-radius: 10px;
     width: 15em;
     height: 24em;
@@ -66,9 +68,20 @@ export default {
     padding: 0.5em;
   }
   .card:hover {
-    background-color: #eeeeee;
+    background-color: #d8c3a5;
   }
   .fav-btn {
-    margin: 0.75em;
+    color: #2c3e50;
+    font-weight: bold;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 2em;
+    border-radius: 2em;
+    background-color: #d8c3a5;
+  }
+  a {
+    text-decoration: none;
   }
 </style>

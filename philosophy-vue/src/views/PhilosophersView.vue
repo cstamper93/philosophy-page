@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Philosophers</h1>
+    <h1 class="title">Philosophers</h1>
     <div class="philosopher-container">
         <philosopher-content v-for="philosopher in listOfPhilosophers" 
         v-bind:key="philosopher.id"
@@ -35,5 +35,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+  }
+  .title {
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 </style>
