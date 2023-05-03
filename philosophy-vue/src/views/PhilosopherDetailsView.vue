@@ -1,16 +1,14 @@
 <template>
   <div>
-    <div class="title-box">
-        <philosopher-details :userChoice = "userChoice" />
+    <philosopher-details :userChoice = "userChoice" />
     <div class="dividing-line"></div>
         <h2>Schools of Thought:</h2>
         <schools-content v-for="school in schoolsList" 
         :key="school"
         :school="school"/>
-    </div>
     <div class="dividing-line"></div>
     <div class="ideas-box">
-        <h1>Key Ideas</h1>
+        <h1 class="ideas-title">Key Ideas</h1>
         <ideas-content v-for="idea in ideasList"
         v-bind:key="idea"
         v-bind:idea="idea" />
@@ -70,11 +68,14 @@ export default {
 </script>
 
 <style>
-    .dividing-line {
-        width: 85%;
-        height: 0.2em;
-        margin-left: auto;
-        margin-right: auto;
-        background-color: #d2691e;
-    }
+  .dividing-line {
+    width: 85%;
+    height: 0.2em;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #d2691e;
+  }
+  .ideas-title {
+    margin-bottom: 1.5em;
+  }
 </style>

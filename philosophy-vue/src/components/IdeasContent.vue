@@ -1,6 +1,7 @@
 <template>
   <div class="ideas-box">
     <p>"{{ idea }}"</p>
+    <h1 class="dot-separator">. . .</h1>
   </div>
 </template>
 
@@ -29,5 +30,8 @@ export default {
   .ideas-box {
     margin-left: 7em;
     margin-right: 7em;
+  }
+  .dot-separator {
+    color: #d2691e;
   }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="details-box">
-    <div class="img">
+    <div class="img-div">
       <img class="philosopher-image" v-bind:src="philosopher.photo">
     </div>
     <div class="name-nat-era">
-      <h1>{{ philosopher.name }}</h1>
+      <h1 class="name">{{ philosopher.name }}</h1>
       <h2>Nationality:</h2>
       <p>{{ philosopher.nationality }}</p>
       <h2>Era:</h2>
@@ -33,12 +33,6 @@ export default {
           this.philosopher = response.data;
         }
       });
-      // BackendService.fetchIdeasWithId(this.userChoice).then((response) => {
-      //   if(response.status === 200) {
-      //     console.log(response.data);
-      //     this.ideasList = response.data;
-      //   }
-      // });
     }
 };
 </script>
@@ -46,14 +40,13 @@ export default {
 <style>
   .details-box {
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .img {
-    margin-left: 2em;
+  .img-div {
     margin-right: 2em;
   }
   .name-nat-era {
     margin-left: 2em;
-    margin-top: auto;
-    margin-bottom: auto;
   }
 </style>
