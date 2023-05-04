@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <philosopher-details :userChoice = "userChoice" />
+  <div class="details-page">
+    <philosopher-details :philosopher = "philosopher" />
     <div class="dividing-line"></div>
-        <h2>Schools of Thought:</h2>
+    <h2 class="schools-title">Schools of Thought</h2>
+    <div class="schools-container">
         <schools-content v-for="school in schoolsList" 
         :key="school"
         :school="school"/>
+    </div>
     <div class="dividing-line"></div>
     <div class="ideas-box">
-        <h1 class="ideas-title">Key Ideas</h1>
+        <h2 class="ideas-title">Key Ideas</h2>
         <ideas-content v-for="idea in ideasList"
         v-bind:key="idea"
         v-bind:idea="idea" />
@@ -30,19 +32,28 @@ export default {
     name: 'philosopher-details-view',
     data() {
         return {
+            philosopher: null,
             ideasList: [],
             schoolsList: []
         }
     },
     created() {
+        BackendService.fetchPhilosopherDeets(this.userChoice).then((response) => {
+          if(response.status === 200) {
+            console.log('Philosopher loaded here');
+            this.philosopher = response.data;
+          }
+        });
         BackendService.fetchIdeasWithId(this.userChoice).then((response) => {
             if(response.status === 200) {
-                this.ideasList = response.data;
+              console.log('Ideas loaded here.');
+              this.ideasList = response.data;
             }
         });
         BackendService.fetchSchoolsWithId(this.userChoice).then((response) => {
             if(response.status === 200) {
-                this.schoolsList = response.data;
+              console.log('Schools loaded here.');
+              this.schoolsList = response.data;
             }
         });
     },
@@ -56,18 +67,15 @@ export default {
                 console.error('Error retrieving user selection from local storage :', error);
                 return null;
             }
-        },
-        // philosopherDetails() {
-        //     return BackendService.fetchPhilosopherDeets(this.userChoice);
-        // },
-        // ideas() {
-        //     return BackendService.fetchIdeasWithId(this.userChoice);
-        // },
+        }
     },  
 }
 </script>
 
 <style>
+  .details-page {
+    padding-bottom: 4em;
+  }
   .dividing-line {
     width: 85%;
     height: 0.2em;
@@ -75,7 +83,15 @@ export default {
     margin-right: auto;
     background-color: #d2691e;
   }
+  .schools-title {
+    margin-top: 1.5em;
+  }
   .ideas-title {
-    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  .schools-container {
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 </style>

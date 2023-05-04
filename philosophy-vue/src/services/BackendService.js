@@ -8,9 +8,6 @@ export default {
     viewPhilosophersFromDb() {
         return http.get("/philosophers");
     },
-    // addPhilosopherToFavorites(philosopher) {
-    //     return http.post("/add-philosopher", philosopher);
-    // },
     fetchFavorites() {
         return http.get("/favorites");
     },

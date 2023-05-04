@@ -5,7 +5,7 @@
   v-on:click="saveUserChoice(favorite.id)">
     <h2 class="name">{{ favorite.name }}</h2>
     <img class="image" v-bind:src="favorite.photo">
-    <button @click="removeFav(favorite)" class="remove-btn">Remove from Favorites</button>
+    <button @click.prevent="removeFav(favorite)" class="remove-btn">Remove from Favorites</button>
   </div>
   </router-link>
 </template>

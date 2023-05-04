@@ -14,26 +14,14 @@
 </template>
 
 <script>
-import BackendService from '@/services/BackendService';
 export default {
     name: "philosopher-details",
     data() {
-        return {
-          philosopher: null,
-          ideasList: []
-        }
+        return {}
     },
     props: {
-      userChoice: Number
+      philosopher: Object
     },
-    created() {
-      BackendService.fetchPhilosopherDeets(this.userChoice).then((response) => {
-        if(response.status === 200) {
-          console.log(response.data);
-          this.philosopher = response.data;
-        }
-      });
-    }
 };
 </script>
 
@@ -42,11 +30,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1.5em;
   }
   .img-div {
-    margin-right: 2em;
+    margin-right: 3em;
   }
   .name-nat-era {
-    margin-left: 2em;
+    margin-left: 3em;
   }
 </style>

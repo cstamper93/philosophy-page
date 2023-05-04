@@ -22,5 +22,6 @@ export default {
     display: flex;
     flex-direction: column;
     list-style-position: inside;
+    margin-bottom: 1em;
   }
 </style>
