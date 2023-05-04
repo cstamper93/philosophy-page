@@ -6,9 +6,9 @@
     <div class="name-nat-era">
       <h1 class="name">{{ philosopher.name }}</h1>
       <h2>Nationality:</h2>
-      <p>{{ philosopher.nationality }}</p>
+      <p><em>{{ philosopher.nationality }}</em></p>
       <h2>Era:</h2>
-      <p>{{ philosopher.era }}</p>
+      <p><em>{{ philosopher.era }}</em></p>
     </div>
   </div>
 </template>

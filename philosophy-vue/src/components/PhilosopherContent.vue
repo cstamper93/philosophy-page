@@ -8,8 +8,6 @@
     <button v-if="philosopher.favorited == false" class="fav-btn" 
     v-on:click.prevent="addToFavorites(philosopher)">Add to Favorites
     </button>
-    <!-- <p v-if="hover">Nationality: {{ philosopher.nationality }}</p>
-    <p v-if="hover">Era: {{ philosopher.era }}</p> -->
   </div>
   </router-link>
 </template>
@@ -52,6 +50,8 @@ export default {
 <style>
   .philosopher-image { 
     width: 10em; 
+    border: 0.15em solid #2c3e50;
+    border-radius: 10px; 
   }
   .card {
     background-color: #eae7dc;
@@ -66,6 +66,8 @@ export default {
     height: 24em;
     margin: 1em;
     padding: 0.5em;
+    /* box-shadow: 0.5em 0.5em 0.25em #d8c3a5; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   .card:hover {
     background-color: #d8c3a5;
